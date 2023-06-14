@@ -19,7 +19,7 @@ if __name__ == "__main__":
                     metavar='LR', help='initial learning rate', dest='lr')
     parser.add_argument('--seed', default=None, type=int,
                     help='seed for initializing training. ')
-    parser.add_argument('--port', type=int, default=8080, help='Multi-GPU Training Port.')
+    parser.add_argument('--port', type=int, default=5555, help='Multi-GPU Training Port.')
     parser.add_argument('--wd', default=5e-4, type=float, metavar='W',
                     help='weight decay')
     parser.add_argument('--ds', type=str, default='cifar10', choices=['cifar10', 'cifar100'],
@@ -43,15 +43,12 @@ if __name__ == "__main__":
     parser.add_argument('--loss', type=str, default=None, choices=[None, 'focal_loss'],
                         help='loss used in training, set focal loss to use custom loss or leave to use \
                             cross entropy')
-    parser.add_argument('--dv', nargs='+', default=-1,
+    parser.add_argument('--dv', nargs='+',
                         help='List of devices used in training', required=True)
     
     args = parser.parse_args()
     
-    if args.dv != -1:
-        os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(args.dv)
-    else:
-        print("All GPU in use")
+    os.environ["CUDA_VISIBLE_DEVICES"] = ",".join(args.dv)
     
     if args.seed is not None:
         import random
