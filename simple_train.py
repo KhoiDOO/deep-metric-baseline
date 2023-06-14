@@ -116,7 +116,7 @@ def main_worker(gpu, args):
     # Loss 
     criterion = losses.TripletMarginLoss(
         margin=0.2,
-        distances = distances.CosineSimilarity(),
+        distance = distances.CosineSimilarity(),
         reducer=reducers.ThresholdReducer(low=0)
     )
     miner = miners.TripletMarginMiner(
