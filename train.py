@@ -195,8 +195,8 @@ def main_worker(gpu, args):
             valid_label = valid_label.cuda(gpu).long()
             valid_feature = model(valid_input)
             
-            test_features.append(valid_feature.data.cpu().numpy())
-            test_labels.append(valid_label.data.cpu().numpy())
+            test_features.append(valid_feature.data.cpu().numpy()[0])
+            test_labels.append(valid_label.data.cpu().numpy()[0])
             
     eer, ths, neg_score, pos_score = test_roc(test_features, test_labels)
     
