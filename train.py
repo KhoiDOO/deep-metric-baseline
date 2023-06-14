@@ -78,13 +78,11 @@ def main_worker(gpu, args):
     )
     
     # Model
-    model = get_model(
+    num_feature, model = get_model(
         model=args.model,
         weight=args.weight,
-        custom=False
-    ).cuda(gpu)
-    num_feature = model.classifier[1].in_features
-    del model.classifier[1]
+    )
+    model.cuda(gpu)
     
     # Metric
     if args.metric == 'add_margin':
