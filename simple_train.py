@@ -124,7 +124,7 @@ def main_worker(gpu, args):
         distance=distances.CosineSimilarity(), 
         type_of_triplets="semihard"
     )
-    accuracy_calculator = AccuracyCalculator(include=("precision_at_1",), k=1)
+    # accuracy_calculator = AccuracyCalculator(include=("precision_at_1",), k=1)
     
     # Training
     old_loss = 1e26
