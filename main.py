@@ -1,5 +1,6 @@
 import os, sys
 import argparse
+from train import main
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -59,3 +60,5 @@ if __name__ == "__main__":
         random.seed(args.seed)
         np.random.seed(args.seed)
         torch.manual_seed(args.seed)
+    
+    main(args=args)
