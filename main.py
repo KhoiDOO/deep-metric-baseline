@@ -26,18 +26,14 @@ if __name__ == "__main__":
                         help='Data set name')
     
     # Model settings
-    parser.add_argument('--model', type=str, default='effb0', choices= ['effb0'],
+    parser.add_argument('--model', type=str, default='resnet18', choices= ['effb0', 'resnet18'],
                         help='model used in training')
     parser.add_argument('--weight', action='store_true', 
                         help='Toggled to use pretrained weight')
-    parser.add_argument('--custom', action='store_true', 
-                        help='Toggled to use custom model')
     
     # Metric settings
     parser.add_argument('--metric', type=str, default='arc_margin', choices=['add_margin', 'arc_margin', 'sphere'],
                         help="Type of metric used in training")
-    parser.add_argument('--vs', type=int, default=128, 
-                        help='Vector size use in embedding')
     parser.add_argument('--easy_margin', action='store_true', 
                         help='Toggled to use easy margin')
     parser.add_argument('--loss', type=str, default=None, choices=[None, 'focal_loss'],
