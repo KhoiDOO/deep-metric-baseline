@@ -111,7 +111,7 @@ def main_worker(gpu, args):
     )
     
     #Scheduler
-    scheduler = lr_scheduler.CosineAnnealingLR(optimizer=optimizer, T_max=args.epoch)
+    scheduler = lr_scheduler.CosineAnnealingLR(optimizer=optimizer, T_max=args.epochs)
     
     # Loss
     if args.loss == 'focal_loss':
