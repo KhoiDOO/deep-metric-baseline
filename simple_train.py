@@ -128,7 +128,7 @@ def main_worker(gpu, args):
     
     # Training
     old_loss = 1e26
-    old_acc = 0
+    old_eer = 1
     for epoch in range(args.epochs):
         model.train()
         train_features = []
@@ -173,20 +173,20 @@ def main_worker(gpu, args):
                 
                 print(f"Valid - Loss: {valid_loss.item()} - EER: {valid_eer} - Threshold: {valid_ths} - Negative Score: {valid_neg_score} - Positive Score: {valid_pos_score}")
 
-            # if valid_acc >= old_acc and valid_loss <= old_loss:
-            #     best_save_dict = {
-            #         'epoch': epoch,
-            #         'model_state_dict': model.state_dict(),
-            #         'optimizer_state_dict': optimizer.state_dict(),
-            #         'loss': valid_loss,
-            #         'val_acc': valid_acc
-            #     }
-            #     torch.save(best_save_dict, args.best_checkpoint)
-            # last_save_dict = {
-            #     'epoch': epoch,
-            #     'model_state_dict': model.state_dict(),
-            #     'optimizer_state_dict': optimizer.state_dict(),
-            #     'loss': valid_loss,
-            #     'val_acc': valid_acc
-            # }
-            # torch.save(best_save_dict, args.last_checkpoint)
+            if valid_eer <= old_eer and valid_loss <= old_loss:
+                best_save_dict = {
+                    'epoch': epoch,
+                    'model_state_dict': model.state_dict(),
+                    'optimizer_state_dict': optimizer.state_dict(),
+                    'loss': valid_loss,
+                    'eer': valid_eer
+                }
+                torch.save(best_save_dict, args.best_checkpoint)
+            last_save_dict = {
+                'epoch': epoch,
+                'model_state_dict': model.state_dict(),
+                'optimizer_state_dict': optimizer.state_dict(),
+                'loss': valid_loss,
+                'eer': valid_eer
+            }
+            torch.save(last_save_dict, args.last_checkpoint)
