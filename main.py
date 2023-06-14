@@ -1,6 +1,6 @@
 import os, sys
 import argparse
-from train import train
+from simple_train import train
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -30,6 +30,8 @@ if __name__ == "__main__":
                         help='model used in training')
     parser.add_argument('--weight', action='store_true', 
                         help='Toggled to use pretrained weight')
+    parser.add_argument('--vs', type=int, default=128,
+                        help='embedding size')
     
     # Metric settings
     parser.add_argument('--metric', type=str, default='arc_margin', choices=['add_margin', 'arc_margin', 'sphere'],

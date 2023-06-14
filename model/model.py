@@ -10,10 +10,11 @@ model_map = {
     'resnet18' : rn18
 }
 
-def get_model(model:str, weight = True) -> nn.Module:
+def get_model(model:str, vector_size = 128, weight = True) -> nn.Module:
     if model not in list(model_map.keys()):
         raise Exception(f'the model {model} is current not supported')
     
     return model_map[model](
-        weight = weight
+        weight = weight,
+        vector_size = vector_size
     )
