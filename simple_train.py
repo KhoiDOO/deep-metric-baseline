@@ -164,7 +164,7 @@ def main_worker(gpu, args):
                     valid_input = valid_input.cuda(gpu)
                     valid_label = valid_label.cuda(gpu).long()
                     valid_feature = model(valid_input)
-                    valid_loss = criterion(valid_feature, valid_label).item()
+                    valid_loss = criterion(valid_feature, valid_label)
                     
                     valid_features.append(valid_feature.data.cpu().numpy()[0])
                     valid_labels.append(valid_label.data.cpu().numpy()[0])
