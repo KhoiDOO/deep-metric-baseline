@@ -21,7 +21,7 @@ from metrics import *
 from loss import FocalLoss
 from utils import test_roc
 
-def main(args: argparse):
+def train(args: argparse):
     
     # Setup folder
     run_dir = os.getcwd() + "/runs"
