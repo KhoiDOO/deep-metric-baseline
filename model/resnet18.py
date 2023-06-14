@@ -2,11 +2,11 @@ import torch
 from torch import nn
 from torchvision import models
 
-def effb0(weight = True):
-    model = models.efficientnet_b0(
+def rn18(weight = True):
+    model = models.resnet18(
         weights='IMAGENET1K_V1' if weight else 'DEFAULT'
     )
-    num_feature = model.classifier[1].in_features
-    del model.classifier[1]
+    num_feature = model.fc.in_features
+    del model.fc
     
     return (num_feature, model)
