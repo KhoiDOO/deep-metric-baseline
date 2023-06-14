@@ -147,7 +147,7 @@ def main_worker(gpu, args):
             
             model.eval()
             with torch.no_grad():
-                for _, valid_data in tqdm(enumerate(test_loader)):
+                for _, valid_data in enumerate(test_loader):
                     valid_input, valid_label = valid_data
                     valid_input = valid_input.cuda(gpu)
                     valid_label = valid_label.cuda(gpu).long()
@@ -189,7 +189,7 @@ def main_worker(gpu, args):
     test_features = []
     test_labels = []
     with torch.no_grad():
-        for _, valid_data in tqdm(enumerate(test_loader)):
+        for _, valid_data in enumerate(test_loader):
             valid_input, valid_label = valid_data
             valid_input = valid_input.cuda(gpu)
             valid_label = valid_label.cuda(gpu).long()

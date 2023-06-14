@@ -45,6 +45,10 @@ if __name__ == "__main__":
                             cross entropy')
     parser.add_argument('--dv', nargs='+',
                         help='List of devices used in training', required=True)
+    parser.add_argument('--m', type=int, default=2,
+                        help='m params for arc margin')
+    parser.add_argument('--s', type=int, default=6,
+                        help='s params for arc margin')
     
     args = parser.parse_args()
     
