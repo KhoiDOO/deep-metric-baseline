@@ -26,7 +26,7 @@ if __name__ == "__main__":
                         help='Data set name')
     
     # Model settings
-    parser.add_argument('--model', type=str, default='resnet18', choices= ['effb0', 'resnet18'],
+    parser.add_argument('--model', type=str, default='effb0', choices= ['effb0', 'resnet18'],
                         help='model used in training')
     parser.add_argument('--weight', action='store_true', 
                         help='Toggled to use pretrained weight')
