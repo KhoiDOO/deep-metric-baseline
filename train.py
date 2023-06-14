@@ -82,6 +82,8 @@ def main_worker(gpu, args):
         model=args.model,
         weight=args.weight,
     )
+    if args.model == 'resnet18':
+        model.fc = nn.Identity()
     model.cuda(gpu)
     
     # Metric
