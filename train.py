@@ -4,7 +4,6 @@ import pandas as pd
 from datetime import datetime
 from tqdm import tqdm
 import json
-import time
 import numpy as np
 
 import torch
@@ -31,7 +30,7 @@ def main(args: argparse):
     metric_dir = run_dir + f"/{args.metric}"
     os.makedirs(metric_dir, exist_ok = True)
     
-    now = now.strftime("%m-%d-%Y - %H-%M-%S")
+    now = datetime.now().strftime("%m-%d-%Y - %H-%M-%S")
     save_dir = metric_dir + f"/{now}"
     os.makedirs(save_dir, exist_ok = True)
     
