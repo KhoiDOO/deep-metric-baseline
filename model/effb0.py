@@ -2,7 +2,7 @@ import torch
 from torch import nn
 from torchvision import models
 
-def effb6(num_input = None, num_class = 1000, weight = True, custom = False):
+def effb0(num_input = None, num_class = 1000, weight = True, custom = False):
     model = models.efficientnet_b0(
         weights='IMAGENET1K_V1' if weight else 'DEFAULT'
     )

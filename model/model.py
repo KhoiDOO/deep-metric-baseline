@@ -2,10 +2,10 @@ import torch
 from torch import nn
 from torchvision import models
 import argparse
-from .effb6 import effb6
+from .effb0 import effb0
 
 model_map = {
-    'effb6' : effb6
+    'effb0' : effb0
 }
 
 def get_model(model:str, num_input:int = None, num_classes:int = None, weight = False, custom = False) -> nn.Module:
