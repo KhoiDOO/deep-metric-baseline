@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # Training settings
     parser.add_argument('--bs', type = int, default=32,
                     help='batch size')
-    parser.add_argument('--workers', type = int, default=4,
+    parser.add_argument('--workers', type = int, default=2,
                     help='Number of processor used in data loader')
     parser.add_argument('--epochs', type = int, default=1,
                     help='# Epochs used in training')
