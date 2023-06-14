@@ -88,11 +88,11 @@ def main_worker(gpu, args):
     
     # Metric
     if args.metric == 'add_margin':
-        metric_fc = AddMarginProduct(num_feature, num_classes, s=30, m=0.35)
+        metric_fc = AddMarginProduct(num_feature, num_classes, s=args.s, m=args.m)
     elif args.metric == 'arc_margin':
-        metric_fc = ArcMarginProduct(num_feature, num_classes, s=30, m=0.5, easy_margin=args.easy_margin)
+        metric_fc = ArcMarginProduct(num_feature, num_classes, s=args.s, m=args.m, easy_margin=args.easy_margin)
     elif args.metric == 'sphere':
-        metric_fc = SphereProduct(num_feature, num_classes, m=4)
+        metric_fc = SphereProduct(num_feature, num_classes, m=args.m)
     else:
         # metric_fc = nn.Linear(num_feature, num_classes)
         raise ValueError(f"metric must be one of ['add_margin', 'arc_margin', 'sphere'], found {args.metric} instead")
