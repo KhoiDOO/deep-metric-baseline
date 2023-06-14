@@ -15,7 +15,7 @@ if __name__ == "__main__":
                     help='Number of processor used in data loader')
     parser.add_argument('--epochs', type = int, default=1,
                     help='# Epochs used in training')
-    parser.add_argument('--lr', type=float, default=0.01, 
+    parser.add_argument('--lr', type=float, default=0.0001, 
                     metavar='LR', help='initial learning rate', dest='lr')
     parser.add_argument('--seed', default=None, type=int,
                     help='seed for initializing training. ')
