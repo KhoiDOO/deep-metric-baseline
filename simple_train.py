@@ -96,7 +96,7 @@ def main_worker(gpu, args):
     )
     
     # Model
-    num_feature, model = get_model(
+    model = get_model(
         model=args.model,
         weight=args.weight,
         vector_size=args.vs
