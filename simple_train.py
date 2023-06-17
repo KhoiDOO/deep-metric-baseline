@@ -159,7 +159,6 @@ def main_worker(gpu, args):
                 writer.add_embedding(
                     mat=train_feature,
                     metadata=train_label.data.cpu().numpy().tolist(),
-                    label_img=train_input,
                     global_step=epoch,
                     tag='train'
                 )
@@ -185,8 +184,7 @@ def main_worker(gpu, args):
                     
                     writer.add_embedding(
                         mat=train_feature,
-                        metadata=train_label.data.cpu().numpy().tolist(),
-                        label_img=train_input,
+                        metadata=train_label.data.cpu().numpy().tolist(),                        
                         global_step=epoch,
                         tag='valid'
                     )
