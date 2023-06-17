@@ -5,6 +5,7 @@ from datetime import datetime
 from tqdm import tqdm
 import json
 import numpy as np
+from torch.utils.tensorboard import SummaryWriter
 
 import torch
 import torch.multiprocessing as mp
@@ -52,6 +53,7 @@ def train(args: argparse):
     save_dir = metric_dir + f"/{now}"
     os.makedirs(save_dir, exist_ok = True)
     
+    args.log_dir = save_dir
     args.log_path = save_dir + "/log.parquet"
     args.best_checkpoint = save_dir + "/best.pt"
     args.last_checkpoint = save_dir + "/last.pt"
@@ -79,6 +81,10 @@ def main_worker(gpu, args):
 
     torch.cuda.set_device(gpu)
     torch.backends.cudnn.benchmark = True
+    
+    #Writer
+    if args.rank == 0:
+        writer = SummaryWriter(args.log_dir)
     
     # Data Loader
     num_classes, train_dataset, test_dataset = get_dataset(args=args)
@@ -148,6 +154,13 @@ def main_worker(gpu, args):
             if args.rank == 0:
                 train_features.append(train_feature.data.cpu().numpy()[0])
                 train_labels.append(train_label.data.cpu().numpy()[0])
+                
+                writer.add_embedding(
+                    mat=train_feature,
+                    metadata=train_labels[epoch].tolist(),
+                    label_img=train_input,
+                    global_step=epoch
+                )
         
         if args.rank == 0:
             train_eer, train_ths, train_neg_score, train_pos_score = test_roc(train_features, train_labels)
@@ -189,3 +202,6 @@ def main_worker(gpu, args):
                 'eer': valid_eer
             }
             torch.save(last_save_dict, args.last_checkpoint)
+
+    if args.rank == 0:
+        writer.close()
