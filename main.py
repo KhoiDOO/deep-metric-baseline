@@ -23,6 +23,8 @@ if __name__ == "__main__":
                     help='weight decay')
     parser.add_argument('--ds', type=str, default='cifar10', choices=['cifar10', 'cifar100'],
                         help='Data set name')
+    parser.add_argument('--metric', type=str, default='tpl', choices=['tpl'],
+                        help='Type of metric used')
     
     # Model settings
     parser.add_argument('--model', type=str, default='effb0', choices= ['effb0', 'resnet18'],
