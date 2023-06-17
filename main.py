@@ -9,7 +9,7 @@ if __name__ == "__main__":
                     epilog='ENJOY!!!')
 
     # Training settings
-    parser.add_argument('--bs', type = int, default=32,
+    parser.add_argument('--bs', type = int, default=128,
                     help='batch size')
     parser.add_argument('--workers', type = int, default=2,
                     help='Number of processor used in data loader')
@@ -32,21 +32,8 @@ if __name__ == "__main__":
                         help='Toggled to use pretrained weight')
     parser.add_argument('--vs', type=int, default=128,
                         help='embedding size')
-    
-    # Metric settings
-    parser.add_argument('--metric', type=str, default='arc_margin', choices=['add_margin', 'arc_margin', 'sphere'],
-                        help="Type of metric used in training")
-    parser.add_argument('--easy_margin', action='store_true', 
-                        help='Toggled to use easy margin')
-    parser.add_argument('--loss', type=str, default=None, choices=[None, 'focal_loss'],
-                        help='loss used in training, set focal loss to use custom loss or leave to use \
-                            cross entropy')
     parser.add_argument('--dv', nargs='+',
                         help='List of devices used in training', required=True)
-    parser.add_argument('--m', type=int, default=2,
-                        help='m params for arc margin')
-    parser.add_argument('--s', type=int, default=6,
-                        help='s params for arc margin')
     
     args = parser.parse_args()
     
