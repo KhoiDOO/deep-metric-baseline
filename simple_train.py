@@ -160,7 +160,8 @@ def main_worker(gpu, args):
                     mat=train_feature,
                     metadata=train_label.data.cpu().numpy().tolist(),
                     label_img=train_input,
-                    global_step=epoch
+                    global_step=epoch,
+                    tag='train'
                 )
         
         if args.rank == 0:
@@ -179,8 +180,16 @@ def main_worker(gpu, args):
                     valid_feature = model(valid_input)
                     valid_loss = criterion(valid_feature, valid_label)
                     
-                    valid_features.append(valid_feature.data.cpu().numpy()[0])
-                    valid_labels.append(valid_label.data.cpu().numpy()[0])
+                    valid_features += valid_feature.data.cpu().numpy().tolist()
+                    valid_labels += valid_label.data.cpu().numpy().tolist()
+                    
+                    writer.add_embedding(
+                        mat=train_feature,
+                        metadata=train_label.data.cpu().numpy().tolist(),
+                        label_img=train_input,
+                        global_step=epoch,
+                        tag='valid'
+                    )
                 
                 valid_eer, valid_ths, valid_neg_score, valid_pos_score = test_roc(train_features, train_labels)
                 
