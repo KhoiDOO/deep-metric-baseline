@@ -37,16 +37,6 @@ data_map = {
         '#class' : 100,
         'dataset' : datasets.CIFAR100,
         'img_size' : 32
-    },
-    'imagenet' : {
-        '#class' : 1000,
-        'dataset' : datasets.ImageNet,
-        'img_size' : 224
-    },
-    'tinyimagenet' : {
-        '#class' : 200,
-        'dataset' : datasets.ImageFolder,
-        'img_size' : 64
     }
 }
 
