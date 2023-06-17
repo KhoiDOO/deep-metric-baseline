@@ -4,8 +4,7 @@ from simple_train import train
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-                    prog='Optimizer BenchMark',
-                    description='This project takes into considering the performance comparison between optimizers',
+                    prog='Deep Metric Learning Baseline',
                     epilog='ENJOY!!!')
 
     # Training settings
