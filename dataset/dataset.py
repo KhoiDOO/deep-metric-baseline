@@ -3,21 +3,10 @@ from pathlib import Path
 from torchvision import datasets
 from torchvision import transforms
 import argparse
+from augmentation import CLSTransform, CLTransform
 
 # Save data path
 save_dir = "~/data/"
-
-# Data Augmentation
-def get_base_train_transform(size):
-    return transforms.Compose(
-        [
-            transforms.RandomCrop(size, padding=4),
-            transforms.RandomHorizontalFlip(),
-            transforms.RandomRotation(15),
-            transforms.ToTensor(),
-            transforms.Normalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
-        ]
-    )
 
 base_test_transform = transforms.Compose(
     [
@@ -49,7 +38,7 @@ def get_dataset(args: argparse):
     
     train_dataset = data_info['dataset'](
         root = save_dir,
-        transform = get_base_train_transform(
+        transform = CLSTransform(
             size=data_map[args.ds]['img_size']
         ),
         train = True,
