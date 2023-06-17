@@ -31,7 +31,7 @@ def test_roc(embedding_list, label_list):
     while abs(high - low) > 1e-6:
         middle = (high + low)/2
         far, frr = score(middle)
-        print(middle, far, frr)
+        # print(middle, far, frr)
         threshold = middle
         EER = far
         if frr > far:
