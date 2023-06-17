@@ -3,7 +3,7 @@ from pathlib import Path
 from torchvision import datasets
 from torchvision import transforms
 import argparse
-from augmentation import CLSTransform, CLTransform
+from .augmentation import CLSTransform, CLTransform
 
 # Save data path
 save_dir = "~/data/"
