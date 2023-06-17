@@ -173,7 +173,7 @@ def main_worker(gpu, args):
             with torch.no_grad():
                 valid_features = []
                 valid_labels = []
-                for _, valid_data in enumerate(test_loader):
+                for _, valid_data in tqdm(enumerate(test_loader)):
                     valid_input, valid_label = valid_data
                     valid_input = valid_input.cuda(gpu)
                     valid_label = valid_label.cuda(gpu).long()
