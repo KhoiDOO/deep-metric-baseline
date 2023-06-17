@@ -108,6 +108,7 @@ def main_worker(gpu, args):
         vector_size=args.vs
     )
     model.cuda(gpu)
+    model = DDP(model, device_ids=[gpu])
     
     # Optimizer
     optimizer = torch.optim.Adam(
@@ -152,12 +153,12 @@ def main_worker(gpu, args):
             scheduler.step()
             
             if args.rank == 0:
-                train_features.append(train_feature.data.cpu().numpy()[0])
-                train_labels.append(train_label.data.cpu().numpy()[0])
+                train_features += train_feature.data.cpu().numpy().tolist()
+                train_labels += train_label.data.cpu().numpy().tolist()
                 
                 writer.add_embedding(
                     mat=train_feature,
-                    metadata=train_labels[epoch].tolist(),
+                    metadata=train_label.data.cpu().numpy().tolist(),
                     label_img=train_input,
                     global_step=epoch
                 )
