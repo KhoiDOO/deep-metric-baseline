@@ -19,7 +19,7 @@ from pytorch_metric_learning.utils.accuracy_calculator import AccuracyCalculator
 
 from dataset import get_dataset
 from model import get_model
-from utils import test_roc
+from utils import test_roc, blockPrint, enablePrint
 
 def train(args: argparse):
     
@@ -156,12 +156,14 @@ def main_worker(gpu, args):
                 train_features += train_feature.data.cpu().numpy().tolist()
                 train_labels += train_label.data.cpu().numpy().tolist()
                 
+                blockPrint()
                 writer.add_embedding(
                     mat=train_feature,
                     metadata=train_label.data.cpu().numpy().tolist(),
                     global_step=epoch,
                     tag='train'
                 )
+                enablePrint()
         
         if args.rank == 0:
             train_eer, train_ths, train_neg_score, train_pos_score = test_roc(train_features, train_labels)
@@ -182,12 +184,14 @@ def main_worker(gpu, args):
                     valid_features += valid_feature.data.cpu().numpy().tolist()
                     valid_labels += valid_label.data.cpu().numpy().tolist()
                     
+                    blockPrint()
                     writer.add_embedding(
                         mat=train_feature,
                         metadata=train_label.data.cpu().numpy().tolist(),                        
                         global_step=epoch,
                         tag='valid'
                     )
+                    enablePrint()
                 
                 valid_eer, valid_ths, valid_neg_score, valid_pos_score = test_roc(train_features, train_labels)
                 
